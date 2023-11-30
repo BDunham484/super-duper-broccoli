@@ -1,0 +1,1077 @@
+# 05.4 Full-Time Lesson Plan: Test-Driven Development
+
+## Overview
+
+Today's class continues the topic of OOP with polymorphism and then introduces students to test-driven-development and unit testing JavaScript applications.
+
+## Instructor Notes
+
+* In this lesson, students will complete activities `09-Ins_Polymorphism` through `20-Stu_TDD`.
+
+* To refresh your memory of some of the specific methods often used by testing frameworks, consider creating a few failing tests before class, then write the code to make them pass. You might also benefit from installing the [Jest Snippets](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets) plugin for VS Code.
+
+* Remind students to do a `git pull` of the class repo to have today's activities ready and open in VS Code. 
+
+* If you are comfortable doing so, live-code the solutions to the activities. If not, just use the solutions provided and follow the prompts and talking points for review.
+
+* Let students know that the Bonus at the end of each activity is not meant to be extra coding practice, but is a self-study on topics beyond the scope of this module for those who want to further their knowledge.
+
+## Learning Objectives
+
+* Explain polymorphism through method overriding.
+
+* Explain the benefits of test-driven development (TDD).
+
+* Define code requirements for code that hasn't been written yet by using unit tests.
+
+* Write unit tests for pre-existing JavaScript functions.
+
+* Structure test code using the red, green, refactor workflow.
+
+## Time Tracker
+
+| Start  | #   | Activity Name                      | Duration |
+|---     |---  |---                                 |---       |
+| 10:00AM| 1   | Instructor Demo: Polymorphism      | 0:05     |
+| 10:05AM| 2   | Student Do: Polymorphism           | 0:15     |
+| 10:20AM| 3   | Instructor Review: Polymorphism    | 0:10     |
+| 10:30AM| 4   | Instructor Do: Stoke Curiosity     | 0:10     |
+| 10:40AM| 5   | Instructor Demo: Set Up Jest       | 0:05     |
+| 10:45AM| 6   | Student Do: Set Up Jest            | 0:15     |
+| 11:00AM| 7   | Instructor Review: Set Up Jest     | 0:10     |
+| 11:10AM| 8   | Instructor Demo: Failing Tests     | 0:05     |
+| 11:15AM| 9   | Student Do: Failing Tests          | 0:15     |
+| 11:30AM| 10  | Instructor Review: Failing Tests   | 0:10     |
+| 11:40AM| 11  | FLEX                               | 0:20     |
+| 12:00PM| 12  | BREAK                              | 0:30     |
+| 12:30PM| 13  | Instructor Demo: Passing Tests     | 0:05     |
+| 12:35PM| 14  | Student Do: Passing Tests          | 0:15     |
+| 12:50PM| 15  | Instructor Review: Passing Tests   | 0:10     |
+| 1:00PM | 16  | Instructor Demo: Exception Tests   | 0:05     |
+| 1:05PM | 17  | Student Do: Exception Tests        | 0:15     |
+| 1:20PM | 18  | Instructor Review: Exception Tests | 0:10     |
+| 1:30PM | 19  | Instructor Demo: TDD Workflow      | 0:05     |
+| 1:35PM | 20  | Student Do: TDD Workflow           | 0:15     |
+| 1:50PM | 21  | Instructor Review: TDD Workflow    | 0:10     |
+| 2:00PM | 22  | FLEX                               | 0:30     |
+| 2:30PM | 23  | END                                | 0:00     |
+
+- - -
+
+## Class Instruction
+
+### 1. Instructor Demo: Polymorphism (5 min)
+
+* Welcome students to class.
+
+* Open `09-Ins_Polymorphism/index.js` in your IDE and explain the following:
+
+  * In OOP, **polymorphism** refers to the ability to create a variable, a function, or an object that has more than one form.
+  
+  * 🔑 One example of polymorphism is **method overriding**, which allows a child class to provide a specific implementation of a method that already exists from a parent class but behaves differently.
+
+  * In the following example, the `Animal` constructor has a method called, `getLives()` that will return the number 1 as well as a `Dog` constructor function that inherits from the `Animal` constructor function:
+
+    ```js
+    function Animal(name, age, breed) {
+      this.name = name;
+      this.age = age;
+      this.breed = breed;
+      this.nap = function () {
+        console.log('Zzzzzzzzz');
+      };
+      this.getLives = function () {
+        return 1;
+      };
+    }
+
+    function Dog(name, age, breed, puppies) {
+      Animal.call(this, name, age, breed);
+      this.puppies = puppies;
+    }
+
+    Dog.prototype.bark = function () {
+      console.log('Woof!');
+    };
+    ```
+
+  * We then create a `Cat` constructor function that inherits from the `Animal` constructor function but overrides the `getLives()` method, as shown in the following example:
+
+    ```js
+    function Cat(name, age, breed, kittens) {
+      Animal.call(this, name, age, breed);
+      this.kittens = kittens;
+      // 'getLives()' method is overriden to provide Cat with a different functionality
+      this.getLives = function () {
+        return 9;
+      };
+    }
+
+    Cat.prototype.meow = function () {
+      console.log('Meow!');
+    };
+    ```
+
+  * We instantiate new objects from the `Dog` and `Cat` constructor functions and console log the `getLives()` methods from both, as follows:
+
+    ```js
+    const dog = new Dog('Rex', 2, 'Bulldog', ['Baxter', 'Marley', 'Scooby']);
+    const cat = new Cat('Tom', 2, 'Shorthair', ['Garfield', 'Felix', 'Salem']);
+
+    console.log(dog.getLives());
+    console.log(cat.getLives());
+    ```
+  
+  * If we try to run `index.js` the output shows the numbers 1 and 9 because we have overriden the `getLives()` method from within the `Cat` constructor function, as follows:
+
+    ```text
+    1
+    9
+    ```
+
+* Answer any questions before proceeding to the next activity.
+
+* In preparation for the activity, ask TAs to start directing students to the activity instructions found in `10-Stu_Polymorphism/README.md`.
+
+### 2. Student Do: Polymorphism (15 min)
+
+* Direct students to the activity instructions found in `10-Stu_Polymorphism/README.md`.
+
+* Break your students into pairs that will work together on this activity.
+
+  ```md
+  # 🐛 Comment Meta Data Is Incorrect
+
+  Work with a partner to resolve the following issue(s):
+
+  * As a developer, I want to run `printMetaData()` on my comment so I can see the author, date, and reaction emoji.
+
+  ## Expected Behavior
+
+  When I execute `printMetaData()` on the created comment, the `authorName`, `createdOn`, and `reaction` is printed like so: `Created by (authorName) on (createdOn) (reaction)`.
+
+  ## Actual Behavior
+
+  When I execute `printMetaData()` on the created comment, only `authorName` and `createdOn` are included in the output.
+
+  ## Steps to Reproduce the Problem
+
+  1. Open terminal and switch to the `Unsolved` folder for this activity.
+
+  2. Run `node index.js`.
+
+  ## 💡 Hints
+
+  * How can I modify the `printMetaData()` for `Comment()` without changing its functionality for `BlogPost()`?
+
+  ## 🏆 Bonus
+
+  If you have completed this activity, work through the following challenge with your partner to further your knowledge:
+
+  * Polymorphism is one of the four pillars of OOP. What are the other 3 pillars?
+
+  Use [Google](https://www.google.com) or another search engine to research this.
+  ```
+
+* While breaking everyone into groups, remind students and the rest of the instructional staff that questions on Slack or elsewhere are welcome and will be handled. It's a good way for your team to prioritize students who need extra help.
+
+### 3. Instructor Review: Polymorphism (15 min)
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ How comfortable do you feel with polymorphism and method overriding? (Poll via Fist to Five, Slack, or Zoom.)
+
+* Assure students that we will cover the solution to help solidify their understanding. If questions remain, remind them to use office hours to get extra help!
+
+* Use the prompts and talking points (🔑) below to review the following key points:
+
+  * ✔️ Method overriding
+
+* Open `10-Stu-Polymorphism/Solved/index.js` in your IDE and explain the following:
+
+  * At the top of the file, create a `ForumItem` class that has three properties and a `printMetaData()` method. We also have a `BlogPost` class that inherits from the `ForumItem` class, as follows:
+
+    ```js
+    class ForumItem {
+      constructor(authorName, text, createdOn) {
+        this.authorName = authorName;
+        this.text = text;
+        this.createdOn = createdOn;
+      }
+
+      printMetaData() {
+        console.log(`Created by ${this.authorName} on ${this.createdOn}`);
+      }
+    }
+
+    class BlogPost extends ForumItem {
+      constructor(authorName, title, text, createdOn) {
+        super(authorName, text, createdOn);
+        this.title = title;
+        this.comments = [];
+      }
+
+      addComment(comment) {
+        this.comments.push(comment);
+      }
+    }
+    ```
+
+  * 🔑 We then create a `Comment` class that inherits from the `ForumItem` class but additionally overrides the `printMetaData()` method, as follows:
+
+    ```js
+    class Comment extends ForumItem {
+      constructor(authorName, text, createdOn, reaction) {
+        super(authorName, text, createdOn);
+        this.reaction = reaction;
+      }
+
+      // We use method overriding to change the value of printMetaData for only instances of the Comment class constructor.
+      printMetaData() {
+        console.log(
+          `Created by ${this.authorName} on ${this.createdOn} ${this.reaction}`
+        );
+      }
+    }
+    ```
+
+  * Then we instantiate a `newPost` object from the `BlogPost` class and a `newComment` object from `Comment`. Then we call the `printMetaData()` method from each object, as shown in the following example:
+
+    ```js
+    const newPost = new BlogPost(
+      'John Doe',
+      'My Fourth Post',
+      'Dogs, cats, and snakes are super cute!',
+      '12/19/2021'
+    );
+
+    const newComment = new Comment(
+      'Jane Doe',
+      'This post is really awesome!',
+      '12/20/2021',
+      '🐶😺🐍'
+    );
+
+    newPost.printMetaData();
+    newComment.printMetaData();
+    ```
+  
+  * Finally, we run the `index.js` file and receive the following result:
+
+    ```text
+    Created by John Doe on 12/19/2021
+    Created by Jane Doe on 12/20/2021 🐶😺🐍
+    ```
+
+    * 🔑 The resulting output shows us that the `printMetaData()` method called for each object is formatted differently because the method was overridden at the creation of the `Cat` class.
+
+* Ask the class the following questions (☝️) and call on students for the answers (🙋):
+
+  * ☝️ What is the core concept behind method overriding?
+
+  * 🙋 Method overriding allows a method that has been passed down from a superclass or parent class to a child class but behaves differently when called from an object instantiated from the child class because the behavior has been altered within the child class.
+
+  * ☝️ What can we do if we don't completely understand this?
+
+  * 🙋 We can refer to supplemental material and stick around for office hours to ask for help.
+
+* Take a few minutes to answer any questions students may be before proceeding to the next activity.
+
+### 4. Instructor Do: Stoke Curiosity (10 min)
+
+* Explain to students that **test-driven development (TDD)** is a process and a methodology. Review the following TDD terms:
+
+  * **Unit tests** ensure reliability and validate the expected behavior of things like functions or classes. Unit tests verify that the unit being tested returns the expected output.
+
+  * **Integration tests** ensure the cooperation of units in your application. Integration tests might focus on an API, user input, or a user interface, which could involve subsequent actions like writing to a database or logging output.
+
+  * **End-to-end tests** verify that the application will function as expected from the perspective of a user. These tests usually focus almost entirely on an application's user interface.
+
+* Explain that in this class, we will create tests before we write code, because that is the core tenet of TDD. How we write the code is dictated by the need to make each test pass, setting up a contract-like expectation for ourselves and other developers and keeping the development process-focused.
+
+* We will focus first on the basic TDD workflow and eventually expand on each step, but for now we just need to know the following steps:
+
+  * Write a failing test.
+
+  * Make the test pass.
+
+  * Refactor the implementation.
+
+### 5. Instructor Demo: Set Up Jest (5 min)
+
+* Open `11-Ins_Setup-Jest/package.json` in your IDE and demonstrate the following:
+
+  * We have included `jest` as a dependency in `package.json` and have also included a special test script defined with a value of `jest`, as shown in the following example:
+
+    ```json
+    "scripts": {
+      "test": "jest"
+    },
+    ...
+      "devDependencies": {
+      "jest": "^24.9.0"
+    }
+    ```
+
+* Run `npm install` and  `npm run test` from the command line to demonstrate the following:
+
+  * 🔑 When we run the test, it checks in `package.json` for a script with the key `test`. As we just noted, the test script is defined with a value of `jest`.
+
+  * 🔑 When `jest` is invoked, it will look for files that match a specific pattern (`[filename].test.js`). It will find the one and only test in the `/test` directory and run it.
+
+  * We can see that everything is passing; explain to students that we will be diving into how this works as we continue.
+
+* Answer any questions before proceeding to the next activity.
+
+* In preparation for the activity, ask TAs to start directing students to the activity instructions found in `12-Stu_Setup-Jest/README.md`
+
+### 6. Student Do: Set Up Jest (15 min)
+
+* Direct students to the activity instructions found in `12-Stu_Setup-Jest/README.md`.
+
+* Break your students into pairs to work together on this activity.
+
+  ```md
+    # 🐛 Unable to Run Tests
+
+    Work with a partner to resolve the following issue(s):
+
+    * As a developer, I want to run my unit tests so that I can have confidence that my code works.
+
+    ## Expected Behavior
+
+    When I execute `npm run test` on the command line, my unit test runs and output is displayed in the command line.
+
+    ## Actual Behavior
+
+    When I execute `npm run test` on the command line, an error is printed.
+
+    ## Steps to Reproduce the Problem
+
+    1. Open the terminal and switch to the `Unsolved` folder for this activity.
+
+    2. Run `npm run test`.
+
+    ## Assets
+
+    The following image demonstrates the web application's appearance and functionality:
+
+    ![Screenshot of Jest tests passing in the terminal.](./Images/01-jest-pass.png)
+
+    ---
+
+    ## 💡 Hints
+
+    * How can npm run scripts be added to the `package.json` file?
+
+    * How can development dependencies be added using npm?
+
+    ## 🏆 Bonus
+
+    If you have completed this activity, work through the following challenge with your partner to further your knowledge:
+
+    * How are ATDD and BDD similar to or different from TDD?
+
+    Use [Google](https://www.google.com) or another search engine to research this.
+  ```
+
+* While breaking everyone into groups, remind students and the rest of the instructional staff that questions on Slack or elsewhere are welcome and will be handled. It's a good way for your team to prioritize students who need extra help.
+
+### 7. Instructor Review: Set Up Jest (10 min)
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ How comfortable do you feel with setting up Jest? (Poll via Fist to Five, Slack, or Zoom.)
+
+* Assure students that we will cover the solution to help solidify their understanding. If questions remain, remind them to use office hours to get extra help!
+
+* Open `12-Stu_Setup-Jest/Solved/test/algo.test.js` in your IDE and explain the following:
+
+  * First we need to validate that we have installed the latest version of Jest.
+
+  * Next, we check the package.json to ensure we have added a testing script for Jest, as follows:
+
+    ```js
+    ...
+    "scripts": {
+      "test": "jest"
+    }
+    ...
+    ```
+
+  * Finally, we run `npm run test` and confirm that the written tests either pass or fail based on their conditions.
+
+* Answer any questions before proceeding to the next activity.
+
+### 8. Instructor Demo: Failing Tests (5 min)
+
+* Open `13-Ins_Failing-Test/tests/arithmetic.test.js` in your IDE and demonstrate the following:
+
+  * We are importing `arithmetic.js`, so the tests in this file should correspond to the code in `arithmetic.js`.
+
+  * We start with a `describe` statement that contains several statements. The parent `describe` statement groups together the related tests for different things, which also improves readability. See the following code for an example:
+
+    ```js
+    const Arithmetic = require('../arithmetic.js');
+  
+      describe('Arithmetic', () => {
+        ...
+      }
+    ```
+
+  * The `it` portion of this test describes how the function should behave in a successful test case. For example, this test validates that providing 2 numbers to the constructor and running the `modulus()` method returns the remainder of their division, as shown in the following code:
+
+    ```js
+      it('should take two numbers, divide them, and return the remainder', () => {
+      ...
+    });
+    ```
+
+    * We then use the `Arithmetic()` constructor and test values using the `expect()` and `toEqual()` methods. The newly written `it` should read as follows:
+
+    ```js
+      it('should take two numbers, divide them, and return the remainder', () => {
+      const total = 0;
+      const arithmetic = new Arithmetic();
+      expect(arithmetic.modulus(2, 2)).toEqual(total);
+    });
+    ```
+
+  * 🔑 Explain to students that in a normal TDD workflow, tests would be written before the actual `Arithmetic()` constructor is created, so to start these will all be failing tests. Now we need to write the code that will make these tests pass!
+
+* Answer any questions before proceeding to the next activity.
+
+* In preparation for the activity, ask TAs to start directing students to the activity instructions found in `14-Stu_Failing-Tests/README.md`
+
+### 9. Student Do: Failing Tests (15 min)
+
+* Direct students to the activity instructions found in `14-Stu_Failing-Test/README.md`.
+
+* Break your students into pairs to work together on this activity.
+
+  ```md
+    # 🏗️ Write a Failing Test
+
+    Work with a partner to implement the following user story:
+
+    * As a developer, I want to write a failing test to know what my code should do and to be confident the test can fail.
+
+    ## Acceptance Criteria
+
+    * It's done when I can run `npm run test` and see a failing test in the terminal.
+
+    * It's done when my test code creates an instance of the `Validate` class.
+
+    * It's done when my test code calls the `isPassword` method and passes `""` (empty string) as an argument.
+
+    * It's done when my test code asserts that the expected return value is `false`.
+
+    ---
+
+    ## 💡 Hints
+
+    * What is the purpose of Jest's `expect` function?
+
+    ## 🏆 Bonus
+
+    If you have completed this activity, work through the following challenge with your partner to further your knowledge:
+
+    * What is an End-to-End (E2E) test? What is an integration test? How are these different from a unit test?
+
+    Use [Google](https://www.google.com) or another search engine to research this.
+  ```
+
+* While breaking everyone into groups, remind students and the rest of the instructional staff that questions on Slack or elsewhere are welcome and will be handled. It's a good way for your team to prioritize students who need extra help.
+
+### 10. Instructor Review: Failing Tests (10 min)
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ How comfortable do you feel with writing code for failing tests? (Poll via Fist to Five, Slack, or Zoom.)
+
+* Assure students that we will cover the solution to help solidify their understanding. If questions remain, remind them to use office hours to get extra help!
+
+* Use the prompts and talking points (🔑) below to review the following key points:
+
+  * ✔️ TDD cycle
+
+  * ✔️ `validate.test.js`
+
+  * ✔️ `npm run test`
+
+* Open `14-Stu_Failing-Test/Solved/test/validate.test.js` in your IDE and explain the following:
+
+  * 🔑 We will follow the TDD cycle and create tests to determine the requirements of our `Validate` class.
+  
+  * 🔑 The test in `validate.test.js` should look familiar. We need to build a function called `isPassword()` that takes in a string as an argument and, if the string is empty, returns `false`:
+
+    ```js
+    describe('Validate', () => {
+
+      describe('invalid', () => {
+        it('should return false for empty password', () => {
+          const str = '';
+
+          const result = new Validate().isPassword(str);
+
+          expect(result).toEqual(false);
+        });
+      });
+    });
+    ```
+
+* Open `14-Stu_Failing-Test/Solved/validate.js` in your IDE and explain the following:
+
+  * Since the intention of the activity is to show how a test naturally fails from the beginning, we only instantiate `Validate` as a class and define its method, as shown in the following example:
+
+    ```js
+    class Validate {}
+
+    Validate.prototype.isPassword = function () {};
+    ```
+
+* Run `npm run test` in the console and demonstrate the following:
+
+  * 🔑 Success! (Or, more appropriately, Fail!) When we run `npm run test`, `isPassword()` fails the test, as shown in the following example:
+
+    ```bash
+    Validate
+      invalid
+        × should return false for empty password (3ms)
+    ```
+
+* Answer any questions before proceeding to the next activity.
+
+### 11. FLEX (20 min)
+
+* This time can be utilized for reviewing key topics learned so far in this module or getting started on the Challenge.
+
+### 12. BREAK (30 min)
+
+This time can be utilized for reviewing key topics learned so far in this module or getting started on the Challenge.
+
+### 13. Instructor Demo: Passing Tests (5 min)
+
+* Open `15-Ins_Passing-Test/test/arithmetic.test.js` in your IDE and demonstrate the following:
+
+* Once our tests are written, it is time to create the actual code that we want to test.
+
+* In this example, we are testing an `Arithmetic` constructor to make sure it has the necessary `modulus` method and that it works both even and odd numbers:
+
+    ```js
+    // Constructor Arithmetic is imported.
+    const Arithmetic = require('../arithmetic.js');
+
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+      // A test is created to check that modulus does in fact return the remainder of the quotient of the two numbers.
+      describe('modulus', () => {
+      // This test checks to see if 2 % 2 has a remainder of 0 and returns 0.
+        it('should calculate 2 % 2 and return 0 as the remainder', () => {
+          const total = 0;
+          const arithmetic = new Arithmetic();
+          expect(arithmetic.modulus(2, 2)).toEqual(total);
+        });
+
+      // This test checks to see if 3 % 2 has a remainder of 1 and returns 1.
+        it('should calculate 3 % 2 and return 1 as the remainder', () => {
+          const total = 1;
+          const arithmetic = new Arithmetic();
+          expect(arithmetic.modulus(3, 2)).toEqual(total);
+        });
+      });
+    });
+
+    ```
+
+* Open `15-Ins_Passing-Test/arithmetic.js` in your IDE and demonstrate the following:
+
+* In this example, we write the actual code for the `Arithmetic` constructor to make sure it passes the tests on the previous file:
+
+    ```js
+    // A constructor Arithmetic is created.
+    function Arithmetic() {};
+
+    // Constructor Arithmetic is given a modulus method that currently doesn't do anything.
+    Arithmetic.prototype.modulus = (a, b) => {
+      return a % b
+    };
+
+    // Constructor Arithmetic is exported from the file.
+    module.exports = Arithmetic;
+    ```
+
+* 🔑 Explain to students that in a normal TDD workflow, the next step after finalizing our code would be to run `npm run test` and ensure that all written tests pass for our program.
+
+* Answer any questions before proceeding to the next activity.
+
+* In preparation for the activity, ask TAs to start directing students to the activity instructions found in `16-Stu_Passing-Tests/README.md`.
+
+### 14. Student Do: Passing Tests (15 min)
+
+* Direct students to the activity instructions found in `16-Stu_Passing-Test/README.md`.
+
+* Break your students into pairs to work together on this activity.
+
+  ```md
+    # 🏗️ Pass Failing Test for Validate isPassword() Method
+
+    Work with a partner to implement the following user story:
+
+    * As a developer, I want to add just enough code to `isPassword()` to pass the failing test, so that I can confidently refactor and optimize my code before adding another test.
+
+    ## Acceptance Criteria
+
+    * It's done when I have added the least amount of code necessary to pass the failing test for the `isPassword()` method.
+
+    * It's done when I run `npm run test` in the terminal and see that all tests are passing.
+
+    * It's done when I follow the red, green, refactor workflow to add more tests until `isPassword()` is complete.
+
+    * It's done when `validate.isPassword` returns `false` given password length is less than 8.
+
+    * It's done when `validate.isPassword` returns `false` given password does not contain at least one capital letter.
+      
+    * It's done when `validate.isPassword` returns `false` given password does not contain at least one lowercase letter.
+
+    * It's done when `validate.isPassword` returns `false` given password does not contain at least one number.
+
+    * It's done  when `validate.isPassword` returns `true` given password is a valid password. (e.g. `Password123`)
+
+    * It's done when all tests are passing.
+
+    ---
+
+    ## 💡 Hints
+
+    What is the least amount of coded needed to get a function to return `false`?
+
+    ## 🏆 Bonus
+
+    If you have completed this activity, work through the following challenge with your partner to further your knowledge:
+
+    * How can you write these tests to ensure that another developer testing your code can understand what the tests are checking?
+
+    Use [Google](https://www.google.com) or another search engine to research this.
+  ```
+
+* While breaking everyone into groups, remind students and the rest of the instructional staff that questions on Slack or elsewhere are welcome and will be handled. It's a good way for your team to prioritize students who need extra help.
+
+### 15. Instructor Review: Passing Tests (10 min) 
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ How comfortable do you feel with writing passing tests? (Poll via Fist to Five, Slack, or Zoom.)
+
+* Assure students that we will cover the solution to help solidify their understanding. If questions remain, remind them to use office hours to get extra help!
+
+* Open `16-Stu_Passing-Test/Solved/test/validate.test.js` in your IDE and explain the following:
+
+  * First, we define a prototype `isPassword()` method:
+
+  ```js
+  Validate.prototype.isPassword = (password) => {
+  ...
+  };
+  ```
+
+  * Before we return `false`, we write a condition to check that the password is at least 8 characters long:
+
+  ```js
+  ...
+  if (password.length < 8) {
+    return false;
+  }
+  ...
+  ```
+
+  * Lastly, we check a Regular Expression against the provided password to make sure it contains at least 1 uppercase, lowercase, and number. We return `false` if all previous conditions fail:
+
+  ```js
+  ...
+    const pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$');
+
+    if (pattern.test(password)) {
+      return true;
+    }
+
+    return false;
+  };
+  ```
+
+* Answer any questions before proceeding to the next activity.
+
+### 16. Instructor Demo: Exception Tests (5 min)
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ Why is it helpful for a function to intentionally throw an error?
+
+  * 🙋 If we throw a helpful error message when a function is misused, the issue is easier to track down and resolve before it causes more errors elsewhere.
+
+* Open `17-Ins_Exception-Tests/arithmetic.js` in your IDE and demonstrate the following:
+
+* Run `node index.js` from the command line and demonstrate the following:
+
+  * 🔑 When we run the constructor, a check is made to verify that each value passed is a number or an operator. If the values don't match the criteria, an error exception is thrown as shown in the following example:
+
+    ```js
+    // Create a new Arithmetic class that behaves much like the previous demonstration.
+    class Arithmetic {
+      constructor(num1, num2, operator) {
+        
+        // Checks to see that both numbers being passed in are of type number. If not, throw an error.
+        if (typeof num1 !== "number" || typeof num2 !== "number") {
+          throw new Error('Please enter numbers for calculation');
+        };
+        
+        this.num1 = num1;
+        this.num2 = num2;
+        this.operator = operator;
+      }
+    };
+
+    module.exports = Arithmetic;
+    ```
+
+* Answer any questions before proceeding to the next activity.
+
+* In preparation for the activity, ask TAs to start directing students to the activity instructions found in `18-Stu_Exception-Tests/README.md`.
+
+### 17. Student Do: Exception Tests (15 min)
+
+* Direct students to the activity instructions found in `18-Stu_Exception-Tests/README.md`.
+
+* Break your students into pairs to work together on this activity.
+
+  ```md
+    # 📖 Implement and Test for an Exception
+
+    Work with a partner to implement the following user story:
+
+    * As a developer, I want the `BlogPost` constructor to throw an error when it is given invalid input so that I catch more bugs before deploying changes.
+
+    ## Acceptance Criteria
+
+    * It's done when I have added tests for an exception when `new BlogPost()` is passed an invalid authorName.  
+
+    * It's done when I have run `npm run test` and all tests pass.
+
+    ## 📝 Notes
+
+    A valid author is a string with at least 2 characters and no more than 15 that
+    begins with a letter and contains only letters, numbers, dashes, and underscores.
+    (`-`, `_`)
+
+    Refer to the documentation:
+
+    [Jest documentation on using Exceptions](https://jestjs.io/docs/using-matchers#exceptions)
+
+    [Mozilla documentation on `throw`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw)
+
+    ---
+
+    ## 💡 Hints
+
+    * What are some different test values for author that you should pass to `new BlogPost()` that should make it throw an exception?
+
+    ## 🏆 Bonus
+
+    If you have completed this activity, work through the following challenge with your partner to further your knowledge:
+
+    * How can Jest be used to test asynchronous code?
+
+    Use [Google](https://www.google.com) or another search engine to research this.
+  ```
+
+* While breaking everyone into groups, remind students and the rest of the instructional staff that questions on Slack or elsewhere are welcome and will be handled. It's a good way for your team to prioritize students who need extra help.
+
+### 18. Instructor Review: Exception Tests (10 min)
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ How comfortable do you feel with using the `Error()` constructor? (Poll via Fist to Five, Slack, or Zoom.)
+
+* Assure students that we will cover the solution to help solidify their understanding. If questions remain, remind them to use office hours to get extra help!
+
+* Open `18-Stu_Exception-Tests/Solved/test/blogPost.test.js` in your IDE and explain the following:
+
+  * 🔑 Using the `Error()` constructor, we check and validate that the `BlogPost()` constructor handles errors appropriately when an author's name is shorter than 2 characters, as shown in the following example:
+
+    ```js
+      describe('Author Length', () => {
+        it('should throw an error when the authorName length is less than 2', () => {
+          const cb = () => new BlogPost('Ed');
+          const err = new Error('Author must be at least 2 characters long.');
+
+          expect(cb).toThrowError(err);
+        });
+      });
+    ```
+
+  * 🔑 Next, we check and validate that the `BlogPost()` constructor handles errors appropriately when an author's name contains characters that don't match our criteria, as shown in the following example:
+
+    ```js
+      describe('Author Characters', () => {
+        it('should throw an error when the authorName contains characters that are not letters, numbers, dashes, or underscores', () => {
+          const cb = () => new BlogPost('johndoe!');
+          const err = new Error(
+            'Author must only contain letters, numbers, dashes, and underscores.'
+          );
+
+          expect(cb).toThrowError(err);
+        });
+      });
+    ```
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ What can we do if we don't completely understand this?
+
+  * 🙋 We can refer to documentation as well as reach out to instructional and support staff, along with our fellow classmates!
+
+* Answer any questions before proceeding to the next activity.
+
+### 19. Instructor Demo: TDD Workflow (5 min)
+
+* Open `19-Ins_TDD/arithmetic.js` in your IDE and demonstrate the following:
+
+  * 🔑 This file exports an `Arithmetic()` constructor that validates parameters and creates methods to complete simple math, as follows:
+
+    ```js
+    class Arithmetic {
+      constructor(num1, num2, operator) {
+
+        // Checks to see that both numbers being passed in are of type number. If not, throw an error.
+        if (typeof num1 !== "number" || typeof num2 !== "number") {
+          throw new Error('Please enter numbers for calculation');
+        }
+        
+        this.num1 = num1;
+        this.num2 = num2;
+        this.operator = operator;
+      }
+
+      // A sum method that returns two numbers added together.
+      sum() {
+        return this.num1 + this.num2;
+      };
+
+      // A difference method that returns two numbers subtracted.
+      difference() {
+        return this.num1 - this.num2
+      };
+
+      // A product method that returns two numbers multiplied together.
+      product() {
+        return this.num1 * this.num2
+      };
+
+      // A quotient method that returns two numbers divided.
+      quotient() {
+        return this.num1 / this.num2
+      };
+
+      // A modulus method that currently doesn't do anything.
+      modulus() {
+        return this.num1 % this.num2
+      };
+    };
+    ```
+
+* Open `19-Ins_TDD/test/arithmetic.test.js` in your IDE and demonstrate the following:
+
+  * 🔑 We require the `Calculator()` constructor and validate that each of the provided methods calculates the corresponding value:
+
+    ```js
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+      // A test is created to check that sum does in fact return the two numbers added together.
+      describe('sum', () => {
+        it('should take two numbers and add them together', () => {
+          const total = 4;
+          const arithmetic = new Calculator(2, 2, "sum");
+          expect(arithmetic.sum()).toEqual(total);
+        });
+      });
+    });
+
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+      // A test is created to check that the difference does in fact return the difference between the two numbers.
+      describe('difference', () => {
+        it('should take two numbers find the difference', () => {
+          const total = 0;
+          const arithmetic = new Calculator(2, 2, "difference");
+          expect(arithmetic.difference()).toEqual(total);
+        });
+      });
+    });
+
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+      // A test is created to check that product does in fact return the two numbers multiplied together.
+      describe('product', () => {
+        it('should take two numbers and multiply them together', () => {
+          const total = 4;
+          const arithmetic = new Calculator(2, 2, "product");
+          expect(arithmetic.product()).toEqual(total);
+        });
+      });
+    });
+
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+      // A test is created to check that quotient does in fact return the quotient of the two numbers.
+      describe('quotient', () => {
+        it('should take two numbers and divide them', () => {
+          const total = 1;
+          const arithmetic = new Calculator(2, 2, "quotient");
+          expect(arithmetic.quotient()).toEqual(total);
+        });
+      });
+    });
+
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+
+      // A test is created to check that modulus does in fact return the remainder of the quotient of the two numbers.
+      // This test checks to see if 2 % 2 has a remainder of 0 and returns 0.
+      describe('modulus', () => {
+        it('should calculate 2 % 2 and return 0 as the remainder', () => {
+          const total = 0;
+          const arithmetic = new Calculator(2, 2, "modulus");
+          expect(arithmetic.modulus()).toEqual(total);
+        });
+      });
+    });
+
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+
+      // A test is created to check that modulus does in fact return the remainder of the quotient of the two numbers.
+      // This test checks to see if 3 % 2 has a remainder of 1 and returns 1.
+      describe('modulus', () => {
+        it('should calculate 3 % 2 and return 1 as the remainder', () => {
+          const total = 1;
+          const arithmetic = new Calculator(3, 2, "modulus");
+          expect(arithmetic.modulus()).toEqual(total);
+        });
+      });
+    });
+
+    // A testing suite for Arithmetic is created.
+    describe('Arithmetic', () => {
+
+      // A test is created to check that modulus does in fact return the remainder of the quotient of the two numbers.
+      // This test checks to see if 10 % 6 has a remainder of 4 and returns 4.
+      describe('modulus', () => {
+        it('should calculate 10 % 6 and return 4 as the remainder', () => {
+          const total = 4;
+          const arithmetic = new Calculator(10, 6, "modulus");
+          expect(arithmetic.modulus()).toEqual(total);
+        });
+      });
+    });
+    ```
+  
+* Answer any questions before proceeding to the next activity.
+
+* In preparation for the activity, ask TAs to start directing students to the activity instructions found in `20-Stu_TDD/README.md`.
+
+### 20. Student Do: TDD Workflow (15 min)
+
+* Direct students to the activity instructions found in `20-Stu_TDD/README.md`.
+
+* Break your students into pairs to work together on this activity.
+
+  ```md
+    # 📐 Add Comments to Implementation of BlogPost Tests
+
+    Work with a partner to add comments describing the functionality of the code found in [Unsolved/lib/BlogPost.test.js](./Unsolved/lib/BlogPost.test.js), [Unsolved/lib/Comment.test.js](./Unsolved/lib/Comment.test.js), and [Unsolved/lib/ForumItem.test.js](./Unsolved/lib/ForumItem.test.js).
+
+    ## 📝 Notes
+
+    Refer to the documentation:
+
+    [Jest](https://jestjs.io/docs/getting-started)
+
+    ---
+
+    ## 🏆 Bonus
+
+    If you have completed this activity, work through the following challenge with your partner to further your knowledge:
+
+    * What does the term "mock" mean in the context of testing? How can you mock a function using Jest?
+
+    Use [Google](https://www.google.com) or another search engine to research this.
+  ```
+
+* While breaking everyone into groups, remind students and the rest of the instructional staff that questions on Slack or elsewhere are welcome and will be handled. It's a good way for your team to prioritize students who need extra help.
+
+### 21. Instructor Review: TDD Workflow (15 min)
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ How comfortable do you feel with test-driven development? (Poll via Fist to Five, Slack, or Zoom.)
+
+* Assure students that we will cover the solution to help solidify their understanding. If questions remain, remind them to use office hours to get extra help!
+
+* Use the prompts and talking points (🔑) below to review the following key points:
+
+  * ✔️ Writing Jest tests
+
+  * ✔️ Writing passing code
+
+* Open `20-Stu_TDD/Solved/test/BlogPost.test.js` in your editor and highlight the following key points:
+
+  * 🔑 On each of the constructor associated test files, we write a test that validates whether each property for the constructor can be assigned:
+
+    ```js
+    // Test to verify that authorName can be assigned.
+    describe('Initialize authorName', () => {
+      it('should set authorName properly', () => {
+        const authorName = 'John Doe';
+        const blogpost = new BlogPost(authorName);
+
+        expect(blogpost.authorName).toBe(authorName);
+      });
+    });
+    ```
+
+  * 🔑 When writing the constructors, we ensure that each property is passed correctly so that it is assigned to the overall constructor value:
+
+    ```js
+    class BlogPost extends ForumItem {
+      constructor(authorName, title, text, createdOn) {
+        super(authorName, text, createdOn);
+        this.title = title;
+        this.comments = [];
+      }
+
+      addComment(comment) {
+        this.comments.push(comment);
+      }
+    }
+    ```
+
+* Ask the class the following question (☝️) and call on students for the answer (🙋):
+
+  * ☝️ What can we do if we don't completely understand this?
+
+  * 🙋 We can refer to supplemental material, read the [Jest API documentation](https://jestjs.io/docs/getting-started), and stick around for office hours to ask for help.
+
+* Answer any questions before proceeding.
+
+### 22. FLEX (30 min)
+
+* This time can be utilized for reviewing key topics learned so far in this module or getting started on the Challenge.
+
+* Answer any questions before ending the class.
+
+### 23. END (0 mins)
+
+How did today’s lesson go? Your feedback is important. Please take 5 minutes to complete this [anonymous survey](https://forms.gle/RfcVyXiMmZQut6aJ6).
+
+---
+© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
