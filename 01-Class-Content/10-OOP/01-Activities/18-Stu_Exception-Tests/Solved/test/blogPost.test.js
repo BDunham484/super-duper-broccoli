@@ -8,7 +8,7 @@ describe('BlogPost', () => {
       const cb = () => new BlogPost('E');
       const err = new Error('Author must be at least 2 characters long.');
 
-      expect(cb).toThrowError(err);
+      expect(result).toThrowError(err);
     });
   });
 
