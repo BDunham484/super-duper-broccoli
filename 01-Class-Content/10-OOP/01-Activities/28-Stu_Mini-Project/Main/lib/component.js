@@ -19,4 +19,8 @@ class Component {
   }
 }
 
+// Component.prototype.testfunc = () => {
+//   console.log('woop')
+// }
+
 module.exports = Component;

@@ -4,6 +4,11 @@ class TaskList extends Component {
   constructor(children) {
     super(children);
   }
+
+render() {
+  this.renderInnerHtml
+}
+
   render() {
     return `<ul class="tasks">${this.renderInnerHtml()}</ul>`;
   }
