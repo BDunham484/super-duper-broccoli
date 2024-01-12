@@ -1,10 +1,12 @@
 const express = require('express');
+// import builit-in Node.js package path to resolve path of files that are located on the server
 const path = require('path');
 
 const app = express();
 const PORT = 3001;
 
 // TODO: Invoke app.use() and serve static files from the '/public' folder
+// static middleware pointing to the public folder
 app.use(express.static('public'));
 
 app.get('/', (req, res) => res.send('Navigate to /send or /routes'));
