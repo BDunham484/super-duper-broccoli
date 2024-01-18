@@ -16,6 +16,10 @@ app.get('/paths', (req, res) =>
   res.sendFile(path.join(__dirname, 'public/paths.html'))
 );
 
+// res.json example
+app.get('/api', (req, res) => res.json(repos));
+
+
 app.listen(PORT, () =>
   console.log(`Example app listening at http://localhost:${PORT}`)
 );
