@@ -47,14 +47,31 @@ app.post('/api/reviews', (req, res) => {
     // Convert the data to a string so we can save it
     const reviewString = JSON.stringify(newReview);
 
+    fs.readFile('./db/reviews.json', 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const parsedReviews = JSON.parse(data);
+
+        parsedReviews.push(newReview);
+
+        fs.writeFile('./db/reviews.json', JSON.stringify(parsedReviews, null, 4),
+        (writeErr) =>
+        writeErr
+        ? console.error(writeErr)
+        : console.info('Successfully updated reviews!')
+        );
+      }
+    });
+
     // Write the string to a file
-    fs.writeFile(`./db/reviews.json`, reviewString, (err) =>
-      err
-        ? console.error(err)
-        : console.log(
-            `Review for ${newReview.product} has been written to JSON file`
-          )
-    );
+    // fs.writeFile(`./db/reviews.json`, reviewString, (err) =>
+    //   err
+    //     ? console.error(err)
+    //     : console.log(
+    //         `Review for ${newReview.product} has been written to JSON file`
+    //       )
+    // );
 
     const response = {
       status: 'success',
@@ -64,7 +81,7 @@ app.post('/api/reviews', (req, res) => {
     console.log(response);
     res.status(201).json(response);
   } else {
-    res.status(500).json('Error in posting review');
+    res.status(400).json('Error in posting review');
   }
 });
 
