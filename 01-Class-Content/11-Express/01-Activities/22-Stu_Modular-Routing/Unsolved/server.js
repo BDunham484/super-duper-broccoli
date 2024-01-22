@@ -5,9 +5,10 @@ const PORT = 3001;
 
 const app = express();
 
-const api = require('./routes/index.js');
+// const api = require('./routes/index.js');
+const routes = require('./routes');
 
-app.use('/api', api);
+app.use('/routes', routes);
 
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
