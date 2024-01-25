@@ -16,15 +16,15 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // MySQL password
-    password: '',
+    password: 'RootyTooty484',
     database: 'classlist_db'
   },
   console.log(`Connected to the classlist_db database.`)
 );
 
 // Query database
-db.query('SELECT * FROM students', function (err, results) {
-  console.log(results);
+db.query('SELECT * FROM students', (err, results) => {
+  err ? console.error(err) : console.log(results);
 });
 
 // Default response for any other request (Not Found)
