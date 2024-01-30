@@ -8,5 +8,5 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 sequelize.sync().then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log(`Now listening on PORT ${PORT}`));
 });
