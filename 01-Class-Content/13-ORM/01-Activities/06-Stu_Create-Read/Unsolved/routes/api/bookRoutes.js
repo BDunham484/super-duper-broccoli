@@ -39,10 +39,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   Book.create(req.body)
     .then((newBook) => {
-      res.json(newBook);
+      res.status(201).json(newBook);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 

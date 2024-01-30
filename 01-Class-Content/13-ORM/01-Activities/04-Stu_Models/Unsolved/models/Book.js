@@ -5,6 +5,11 @@ class Book extends Model {}
 
 Book.init(
   {
+    book_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     title: {
       type: DataTypes.STRING
     },
@@ -28,7 +33,10 @@ Book.init(
     sequelize,
     timestamps: false,
     underscored: true,
-    modelName: 'book'
+    modelName: 'book',
+    // changelog-start
+    freezeTableName: true,
+    // changelog-end
   }
 );
 
