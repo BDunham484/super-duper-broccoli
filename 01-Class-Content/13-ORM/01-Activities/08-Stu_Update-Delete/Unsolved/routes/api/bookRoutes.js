@@ -15,7 +15,7 @@ router.get('/:book_id', async (req, res) => {
   try {
     const book = await Book.findByPk(book_id)
     // const book = await Book.findByPk(book_id, {
-    //   attributes: fields.split(','),
+    //   attributes: [fields]
     // })
 
     if (!book) {
