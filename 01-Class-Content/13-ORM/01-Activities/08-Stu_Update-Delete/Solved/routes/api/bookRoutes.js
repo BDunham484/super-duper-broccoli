@@ -12,20 +12,23 @@ router.get('/', (req, res) => {
 // Updates book based on its book_id
 router.put('/:book_id', (req, res) => {
   //Calls the update method on the Book model
+  const { book_id } = req.params;
+  const _book = re.body
   Book.update(
     {
       // All the fields you can update and the data attached to the request body.
-      title: req.body.title,
-      author: req.body.author,
-      isbn: req.body.isbn,
-      pages: req.body.pages,
-      edition: req.body.edition,
-      is_paperback: req.body.is_paperback,
+      // title: req.body.title,
+      // author: req.body.author,
+      // isbn: req.body.isbn,
+      // pages: req.body.pages,
+      // edition: req.body.edition,
+      // is_paperback: req.body.is_paperback,
+      ..._book,
     },
     {
       // Gets a book based on the book_id given in the request parameters
       where: {
-        book_id: req.params.book_id,
+        book_id: book_id,
       },
     }
   )
