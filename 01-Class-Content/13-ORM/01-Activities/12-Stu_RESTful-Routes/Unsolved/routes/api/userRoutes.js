@@ -3,7 +3,7 @@ const User = require('../../models/User');
 
 // changelog-start
 router.get('/', (req, res) => {
-  // Get all books from the book table
+  // Get all 
   User.findAll().then((userData) => {
     res.json(userData);
   });
@@ -17,7 +17,7 @@ try {
     const userData = await User.findByPk(req.params.id)
 
     if (!userData) {
-      res.status(404).json(userData);
+      res.status(404).json({ message: 'No user with this id!' });
       return
     }
 
