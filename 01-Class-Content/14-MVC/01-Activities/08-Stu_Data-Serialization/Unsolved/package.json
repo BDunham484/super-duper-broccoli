@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "seeds": "node seeds/index.js"
+    "seeds": "node seeds/index.js",
+    "start": "node --watch server.js"
   },
   "author": "",
   "license": "ISC",
