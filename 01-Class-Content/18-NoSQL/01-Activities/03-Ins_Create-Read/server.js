@@ -15,14 +15,14 @@ const client = new MongoClient(connectionStringURI);
 let db;
 
 // Create variable to hold our database name
-const dbName = 'shelterDB';
+const DB_NAME = 'shelterDB';
 
 // Use connect method to connect to the mongo server
 client.connect()
   .then(() => {
     console.log('Connected successfully to MongoDB');
     // Use client.db() constructor to add new db instance
-    db = client.db(dbName);
+    db = client.db(DB_NAME);
 
     // start up express server
     app.listen(port, () => {

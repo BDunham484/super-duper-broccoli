@@ -9,4 +9,10 @@ function counter() {
     }      
 };
 
+const plusPlus = counter();
+
+plusPlus.increment()
+
+
+
 module.exports = counter;

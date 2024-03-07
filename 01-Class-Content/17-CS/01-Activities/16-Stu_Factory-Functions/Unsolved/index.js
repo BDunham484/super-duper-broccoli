@@ -8,7 +8,7 @@ function student(name, gradeYear) {
   return {
     greet: function () {
       console.log(
-        `My name is ${name} and I am in ${gradeYear} grade`
+        `My name is ${studentInfo.name} and I am in ${studentInfo.gradeYear} grade`
       );
     },
   };

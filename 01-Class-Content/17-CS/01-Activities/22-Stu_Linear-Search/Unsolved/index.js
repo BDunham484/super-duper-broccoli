@@ -11,5 +11,11 @@ const linearSearch = (array, element) => {
 };
 
 console.log(linearSearch(arr, 7));
-console.log(typeof linearSearch)
+console.log(typeof linearSearch);
+
+// const num = (num) => {
+//     return num === 7;
+// }
+
+// console.log(arr.findIndex(num));
 
