@@ -14,11 +14,19 @@ Work with a partner to implement the following user story:
 
 * It is done when I have specified the `swSrc` properties in the `InjectManifest` constructor in the `plugins` array in `webpack.config.js`.
 
+* It is done when I find 7 files in the precache storage.
+
+  * It is done when I have updated the source of the img element in the index.html to `https://picsum.photos/id/238/400/550`
+
+  * It is done when I have restarted the application and refreshed the page and found the custom cache storage,`my-image-cache`, with one image file.
+
 ## 📝 Notes
 
 Refer to the documentation:
 
-* [Workbox docs on InjectManifest](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#injectmanifest_plugin)
+* [Workbox docs on InjectManifest](https://developer.chrome.com/docs/workbox/modules/workbox-webpack-plugin/#injectmanifest-plugin)
+
+* [Differences between InjestManifest and GenerateSW](https://developer.chrome.com/docs/workbox/the-ways-of-workbox/#generatesw-vs-injectmanifest )
 
 ## 💡 Hints
 
@@ -35,4 +43,4 @@ If you have completed this activity, work through the following challenge with y
 Use [Google](https://www.google.com) or another search engine to research this.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

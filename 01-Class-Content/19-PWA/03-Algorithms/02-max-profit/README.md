@@ -43,4 +43,4 @@ In this activity, you will write code to create a function that takes in an arra
   * Functions that fail the tests will be denoted with a red x and an error message.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

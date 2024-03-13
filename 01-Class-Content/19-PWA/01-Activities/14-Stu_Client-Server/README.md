@@ -10,7 +10,7 @@ Refer to the documentation:
 
 [NPM docs on concurrently](https://www.npmjs.com/package/concurrently)
 
-[MDN web docs client-server overview](https://expressjs.com/en/starter/installing.html)
+[MDN web docs client-server overview](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Client-Server_overview)
 
 [Installing Express.js server](https://expressjs.com/en/starter/installing.html)
 
@@ -27,4 +27,4 @@ If you have completed this activity, work through the following challenge with y
 Use [Google](https://www.google.com) or another search engine to research this.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

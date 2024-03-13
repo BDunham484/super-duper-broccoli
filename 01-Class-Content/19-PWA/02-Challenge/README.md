@@ -8,7 +8,9 @@ Your task is to build a text editor that runs in the browser. The app will be a 
 
 To build this text editor, you will start with an existing application and implement methods for getting and storing data to an IndexedDB database. You will use a package called `idb`, which is a lightweight wrapper around the IndexedDB API. It features a number of methods that are useful for storing and retrieving data, and is used by companies like Google and Mozilla.
 
-You will deploy this full-stack application to Heroku using the [Heroku Deployment Guide on The Full-Stack Blog](https://coding-boot-camp.github.io/full-stack/heroku/heroku-deployment-guide).
+You will deploy this full-stack application to Render using the [Render Deployment Guide on The Full-Stack Blog](https://coding-boot-camp.github.io/full-stack/render/render-deployment-guide).
+
+**Important**: Make sure your submission includes the `.npmrc` file in this starter code.  This will ensure your application will deploy properly to Render.
 
 ## User Story
 
@@ -44,7 +46,7 @@ WHEN I load my web application
 THEN I should have a registered service worker using workbox
 WHEN I register a service worker
 THEN I should have my static assets pre cached upon loading along with subsequent pages and static assets
-WHEN I deploy to Heroku
+WHEN I deploy to Render
 THEN I should have proper build scripts for a webpack application
 ```
 
@@ -102,7 +104,7 @@ This Challenge is graded based on the following criteria:
 
 ### Deployment: 32%
 
-* Application deployed to Heroku at live URL with build scripts
+* Application deployed to Render at live URL with build scripts
 
 * Application loads with no errors
 
@@ -139,4 +141,4 @@ You are required to submit the following for review:
 * The URL of the GitHub repository, with a unique name and a README describing the project
 
 - - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

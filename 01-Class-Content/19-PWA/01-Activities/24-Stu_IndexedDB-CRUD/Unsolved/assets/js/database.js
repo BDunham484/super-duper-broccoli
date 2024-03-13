@@ -19,7 +19,7 @@ export const postDb = async (content) => {
   const store = tx.objectStore('todos');
   const request = store.add({ todo: content });
   const result = await request;
-  console.log('🚀 - data saved to the database', result);
+  console.log('Data saved to the database', result);
 };
 
 export const getAllDb = async () => {
@@ -65,7 +65,7 @@ export const putDb = async (id, content) => {
   const store = tx.objectStore('todos');
   const request = store.put({ id: id, todo: content });
   const result = await request;
-  console.log('🚀 - data saved to the database', result);
+  console.log('Data saved to the database', result);
 };
 
 initdb();

@@ -20,11 +20,11 @@ Refer to the documentation:
 
 * [Workbox docs on generating a service worker with webpack using GenerateSW](https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack)
 
-* [Workbox docs on GenerateSW](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.GenerateSW)
+* [Workbox docs on GenerateSW](https://developer.chrome.com/docs/workbox/reference/workbox-webpack-plugin/#type-GenerateSW)
 
-* [Simulate offline behavior with Chrome DevTools](https://developers.google.com/web/ilt/pwa/tools-for-pwa-developers#simulate_offline_behavior)
+* [Simulate offline behavior with Chrome DevTools](https://developer.chrome.com/docs/devtools/network/reference/#offline)
 
-* [Interact with service workers with Chrome DevTools](https://developers.google.com/web/ilt/pwa/tools-for-pwa-developers#interact_with_service_workers_in_the_browser)
+* [Interact with service workers with Chrome DevTools](https://developer.chrome.com/docs/workbox/improving-development-experience/#service-worker-development-aids)
 
 ## 💡 Hints
 
@@ -39,4 +39,4 @@ If you have completed this activity, work through the following challenge with y
 Use [Google](https://www.google.com) or another search engine to research this.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

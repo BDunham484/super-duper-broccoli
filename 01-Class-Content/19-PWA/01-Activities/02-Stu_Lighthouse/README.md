@@ -18,6 +18,10 @@ Work with a partner to implement the following user story:
 
 * It's done when I have noted the performance metrics and PWA optimizations in the [audit.md](./Unsolved/audit.md) file.
 
+## 💡 Hints
+
+What can we click on to see PWA optimizations when generating a Lighthouse report?
+
 ## 🏆 Bonus
 
 If you have completed this activity, work through the following challenge with your partner to further your knowledge:
@@ -27,4 +31,4 @@ If you have completed this activity, work through the following challenge with y
 Use [Google](https://www.google.com) or another search engine to research this.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

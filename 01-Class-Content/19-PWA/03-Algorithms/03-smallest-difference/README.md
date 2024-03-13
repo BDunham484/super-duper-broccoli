@@ -49,4 +49,4 @@ In this activity, you will write code to create a function that takes in two sor
 * How can you use the fact that the arrays are sorted to your advantage?
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

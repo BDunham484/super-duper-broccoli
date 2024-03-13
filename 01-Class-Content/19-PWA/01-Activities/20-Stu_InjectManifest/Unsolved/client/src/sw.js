@@ -8,21 +8,21 @@ import { ExpirationPlugin } from 'workbox-expiration';
 
 precacheAndRoute(self.__WB_MANIFEST);
 
-const cacheName = 'static-resources';
-const matchCallback = ({ request }) => {
-  console.log(request);
-  return (
-    // CSS
-    request.destination === 'style' ||
-    // JavaScript
-    request.destination === 'script'
-  );
-};
-
+// Register route for caching dynamic CSS and JS files.
+// i.e. bootstrap, jQuery, ...
+// The StaleWhileRevalidate strategy serves content from cache AND loads it from source if needed.
 registerRoute(
-  matchCallback,
+  ({ request }) => {
+    console.log(request);
+    return (
+      // CSS
+      request.destination === 'style' ||
+      // JavaScript
+      request.destination === 'script'
+    );
+  },
   new StaleWhileRevalidate({
-    cacheName,
+    cacheName: 'static-resources',
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
@@ -31,7 +31,7 @@ registerRoute(
   })
 );
 
-// Register route for caching images
+// Register route for caching dynamic images
 // The cache first strategy is often the best choice for images because it saves bandwidth and improves performance.
 registerRoute(
   ({ request }) => request.destination === 'image',

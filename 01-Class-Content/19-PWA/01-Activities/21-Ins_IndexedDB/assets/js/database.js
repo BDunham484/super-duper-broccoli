@@ -3,7 +3,7 @@ import { openDB } from 'idb';
 
 // Create a function that can be used to start up the database.
 const initdb = async () =>
-// Create a database named todos and we will use version 1.
+// Create a database named demo-db and we will use version 1.
   openDB('demo-db', 1, {
     // Sets the database schema if it isn't already defined.
     upgrade(db) {

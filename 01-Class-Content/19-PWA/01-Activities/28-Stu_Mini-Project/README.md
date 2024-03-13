@@ -1,6 +1,6 @@
-# Module 19 Mini-Project: Deploy Contact Directory App on Heroku with Script
+# Module 19 Mini-Project: Deploy Contact Directory App on Render with Script
 
-In this mini-project, you are given a simple application that needs to be updated to use webpack, service workers, and IndexedDB. In addition, it must have PWA functionality in order to work properly. Once you have updated the application with these new features, you will deploy it to Heroku. Heroku is not new to you, but you will need to add a handful of special scripts so that it knows to deploy your bundled application.
+In this mini-project, you are given a simple application that needs to be updated to use webpack, service workers, and IndexedDB. In addition, it must have PWA functionality in order to work properly. Once you have updated the application with these new features, you will deploy it to Render. Render is not new to you, but you will need to add a handful of special scripts so that it knows to deploy your bundled application.
 
 ## User Stories
 
@@ -52,9 +52,9 @@ The mini-project is complete when the following criteria are met:
 
 * `npm run client` starts the client without the server.
 
-* The web application can be installed from the web address provided by Heroku.
+* The web application can be installed from the web address provided by Render.
 
-* The web application is deployed using Heroku.
+* The web application is deployed using Render.
 
 ---
 
@@ -71,4 +71,4 @@ If you have completed this activity, work through the following challenge with y
 * Incorporate a way to edit information on the contact card using a PUT method with IndexedDB.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
