@@ -3,7 +3,7 @@ export const headerClick = () => {
   if (header.style.color === 'blue') {
     header.style.color = 'black';
   } else {
-    header.style.color = 'blue';
+    header.style.color = 'orange';
   }
 };
 // TODO: Try changing the 'blue' to 'orange' to see if hot reloading works
