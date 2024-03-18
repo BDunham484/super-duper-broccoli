@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+
 
 //TODO: Add WorkboxPlugin with GenerateSW class
 
@@ -18,6 +20,7 @@ module.exports = {
       title: 'Webpack Plugin',
     }),
     new MiniCssExtractPlugin(),
+    new WorkboxPlugin.GenerateSW(),
   ],
   module: {
     rules: [
