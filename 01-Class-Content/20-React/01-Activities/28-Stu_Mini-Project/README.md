@@ -1,8 +1,8 @@
 # Module 20 Mini-Project: Bucket List
 
 In this mini-project, you are given starter code for a React Bucket List app. Some pieces of the application are not complete, and it is your mission to take what you have learned so far and complete the app.
-   
-This project invites you to use most of the concepts you've learned in this module. You will manage state using the `useState` Hook, pass data as props to child components, and use lists and keys to render a list of bucket-list items. 
+
+This project invites you to use most of the concepts you've learned in this module. You will manage state using the `useState` Hook, pass data as props to child components, and use lists and keys to render a list of bucket-list items.
 
 ## Activity
 
@@ -18,13 +18,13 @@ Work with your group to resolve the following issues:
 
 ## Acceptance Criteria
 
-* It's done when I write logic to add a bucket-list item in `components/BucketList.js`.
+* It's done when I write logic to add a bucket-list item in `components/BucketList.jsx`.
 
 * It's done when I write logic to mark a bucket-list item as complete or incomplete.
 
 * It's done when I write logic that will remove a bucket-list item from the list.
 
-* It's done when I write logic to update a bucket-list item in `components/Bucket.js`.
+* It's done when I write logic to update a bucket-list item in `components/Bucket.jsx`.
 
 * It's done when I write logic to render a list of bucket-list items using `.map`.
 
@@ -47,4 +47,4 @@ If you have completed this activity, work through the following challenge with y
 Use [Google](https://www.google.com) or another search engine to research this.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

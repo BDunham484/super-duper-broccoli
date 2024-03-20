@@ -1,13 +1,5 @@
 # 🏗️ Implement Functionality for the Forms Section
 
-## Before We Begin
-
-Before you begin this activity, complete the following steps:
-
-1. Delete the `/src` folder in [00-practice-app](../00-practice-app/).
-
-2. Copy the `/src` folder from [Unsolved](./Unsolved/) and paste it into [00-practice-app](../00-practice-app/).
-
 ## Activity
 
 Work with a partner to implement the following user story:
@@ -43,4 +35,4 @@ If you have completed this activity, work through the following challenge with y
 Use [Google](https://www.google.com) or another search engine to research this.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

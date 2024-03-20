@@ -1,21 +1,5 @@
 # 🐛 Information from the OMDB API Does Not Display
 
-## Before We Begin
-
-Before you begin this activity, complete the following steps:
-
-1. Delete the `/src` folder in [00-practice-app](../00-practice-app/).
-
-2. Copy the `/src` folder from [Unsolved](./Unsolved/).
-
-3. To make API requests, we need to use Axios and Bootstrap. Make sure they are installed by running `npm i axios bootstrap`.
-
-4. This project uses Bootstrap, so don't forget to import it inside `index.js`:
-
-  ```js
-  import 'bootstrap/dist/css/bootstrap.min.css';
-  ```
-
 ## Activity
 
 Work with a partner to resolve the following issue:
@@ -51,4 +35,4 @@ If you have completed this activity, work through the following challenge with y
 Use [Google](https://www.google.com) or another search engine to research this.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

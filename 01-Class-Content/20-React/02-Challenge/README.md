@@ -4,11 +4,9 @@
 
 Being a web developer means being part of a community. You’ll need a place not only to share your projects while you're applying for jobs or working as a freelancer but also to share your work with other developers and collaborate on projects.
 
-Your task is to create a portfolio using your new React skills, which will help set you apart from other developers whose portfolios don’t use the latest technologies. 
+Your task is to create a portfolio using your new React skills, which will help set you apart from other developers whose portfolios don’t use the latest technologies.
 
-You’ll deploy this application to GitHub Pages. Follow the instructions in the Git Guide or consult the [Create React App Docs on GitHub Pages](https://create-react-app.dev/docs/deployment/#github-pages) to create a build that you can deploy.
-
-**Important**: Be sure to push your codebase to the default branch in GitHub -- NOT your built and deployed code. Ensure this happens by using the `gh-pages` branch to host the deployed application's build.
+You’ll deploy this application to Netlify. Follow the instructions in the Git Guide or consult the [Docs on Netlify](https://vitejs.dev/guide/static-deploy.html#netlify) to create a build that you can deploy.
 
 ## User Story
 
@@ -29,7 +27,7 @@ THEN I am presented with the developer's name and navigation with titles corresp
 WHEN I view the navigation titles
 THEN I am presented with the titles About Me, Portfolio, Contact, and Resume, and the title corresponding to the current section is highlighted
 WHEN I click on a navigation title
-THEN I am presented with the corresponding section below the navigation without the page reloading and that title is highlighted
+THEN the browser URL changes and I am presented with the corresponding section below the navigation and that title is highlighted
 WHEN I load the portfolio the first time
 THEN the About Me title and section are selected by default
 WHEN I am presented with the About Me section
@@ -56,17 +54,63 @@ The following animation shows the web application's appearance and functionality
 
 ## Getting Started
 
-You’ll use `create-react-app` to build your portfolio, which will include the following:
+You’ll use `vite` to build your portfolio, which will include the following:
 
 * A single `Header` component that appears on multiple pages
 
-* A single `Navigation` component within the header that will be used to conditionally render the different sections of your portfolio
+* A single `Navigation` component within the header that will use `Link` components from `react-router-dom` to conditionally render the different sections of your portfolio
 
 * A single `Project` component that will be used multiple times in the Portfolio section
 
 * A single `Footer` component that appears on multiple pages
 
 **Note**: Because this application doesn’t include a back end or connect to an API, the contact form doesn't need to save this information right now. You'll add back-end functionality in the next few weeks. In the meantime, consider including your email address and phone number on the Contact page.
+
+### When you would like to scaffold a new `vite` application on your own, follow these steps
+
+1. In the command line, navigate to the desired parent folder and run `npm create vite@4.4.1`.
+
+    * 🔑 *Note*: This command will automatically create a sub-folder which will house your React application; you do not need to perform a `mkdir` command to create one manually.
+
+2. Enter the desired name of your new project folder.
+
+3. From the first list of options, select your framework; for our activities in class, we'll be using `React`.
+
+4. From the second list of options, select your variant; for our activities in class, we'll be using `JavaScript`.
+
+5. `cd` into your newly created project folder and run `npm install`.
+
+    * In later activities we'll add additional NPM packages to our `vite` apps such as 'bootstrap', 'dotenv', and 'axios'.
+
+6. Run `npm dev`/`npm run dev` and navigate to the prompted URL to see your app.
+
+### Further customization (Recommended)
+
+1. Navigate to your `package.json` and modify the `scripts` object so that it looks like this example:
+
+```json
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+```
+
+* Note the addition of the `"start": "vite"` script.
+
+2. Navigate to the `vite.config.js` file and edit the export object so that it looks like this example:
+
+```js
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    open: true
+  }
+})
+```
 
 ### Projects
 
@@ -110,15 +154,15 @@ This Challenge is graded based on the following criteria:
 
 * Satisfies all of the preceding acceptance criteria plus the following:
 
-    * Application must use React to render content.
+  * Application must use React to render content.
 
-    * Application has a single `Header` component that appears on multiple pages, with a `Navigation` component within it that’s used to conditionally render About Me, Portfolio, Contact, and Resume sections.
+  * Application has a single `Header` component that appears on multiple pages, with a `Navigation` component within it that’s used to conditionally render About Me, Portfolio, Contact, and Resume sections.
 
-    * Application has a single `Project` component that’s used multiple times in the Portfolio section.
+  * Application has a single `Project` component that’s used multiple times in the Portfolio section.
 
-    * Application has a single `Footer` component that appears on multiple pages.
+  * Application has a single `Footer` component that appears on multiple pages.
 
-    * Application must be deployed to GitHub Pages.
+  * Application must be deployed to Netlify.
 
 ### Deployment: 32%
 
@@ -158,5 +202,6 @@ You are required to submit BOTH of the following for review:
 
 * The URL of the GitHub repository, with a unique name and a README that describes the project.
 
-- - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+---
+
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

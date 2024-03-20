@@ -1,85 +1,75 @@
-# Deploy React App to GitHub Pages
+# Deploy React App to Netlify
 
-At this point in the course, you have spent some time immersed in React and have even created some React apps of your own. React can seem confusing at first, but the good news is that `create-react-app` gives you the tools to build applications from scratch. This guide will show you how to deploy your React app to GitHub Pages while preserving the file structure of your source files. 
+At this point in the course, you have spent some time immersed in React and have even created some React apps of your own. React can seem confusing at first, but the good news is that `vite` gives you the tools to build applications from scratch. This guide will show you how to deploy your React app to Netlify while preserving the file structure of your source files.
 
-Here are a few details to prepare you for this activity:
+## Sign up with Netlify
 
-* The script you'll use is outlined in the `package.json` file for the React app. You will see it listed under the `scripts` section of the `package.json` for the `build` key-value pair.
+To set up a Netlify project, we need to log into Netlify using a GitHub account. So let's do that now by visiting the Netlify website and [logging in](https://www.netlify.com/).
 
-* This command will output to a `/build` directory. This includes a `/build/static` directory that will contain all the required JavaScript and CSS files.
+## Prepare the Repo
 
-* Every file in this folder contains a unique hash of the file contents. The hash tells the browser how to download a fresh copy of the application every time you build it.
+You'll need to already have your GitHub repository setup with your application's codebase.
 
-Now that we understand a little bit about what this command will do, let's put it into action and get the React app ready for GitHub Pages!
+* Netlify will build your website from the `main` branch on GitHub.
 
-# Prepare the Repo
+  * Note: after deploying with this process, Netlify's Continuous Deployment model will update your live site with subsequent pushes to the `main` branch.
 
-## Add Homepage to package.json
+* When using React Router in your application, you will need overwrite Netlify's default behavior in reading your routes. We can do that by adding a simple file to your `public` folder, which will tell Netlify to route all requests back to your `index.html` file.  
 
-First we need to open the `package.json` file for the client and add an entry called `homepage`. The value of `homepage` should have `{username}` as your GitHub username, and `{repo-name}` as the name of the GitHub repository you created: 
+  * To do so, add a `_redirects` file to the `public` folder, and add this snippet to it:
 
-```
-https://{username}.github.io/{repo-name}
-```
+      ```txt
+        /*  /index.html  200
+      ```
 
-Your updated `package.json` should look something like this:
+  * Check out [Netlify's documentation history `pushState` and single-page apps](https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps) for more information.
 
-```text
-{
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://myusername.github.io/my-app",
-```
+## Deploy the Site
 
-## Install gh-pages and Add Deploy Scripts
+1. [Import the project](https://app.netlify.com/start) to Netlify.
 
-To publish your app, you need to install the `gh-pages` npm package. Additionally, you'll need to add a few more scripts to `package.json`. Start by simply adding the `gh-pages` dependency:
+![Netlify displays options for importing in a project with the option to connect via Github.](./Images/1-Getting-Started.PNG)
 
-```sh
-npm i gh-pages
-```
-**Note:** You will see another package manager called `yarn` suggested by `create-react-app`. `yarn` is very similar to `npm`, but for the sake of consistency we will stick with `npm`.
+2. Select your repository.
 
-Now lets add the `predeploy` and `deploy` scripts to `package.json`. 
+![After selecting Github, you can choose the repository to deploy by searching up through the search menu.](./Images/2-Select-Repo.PNG)
 
-```text
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-```
+* You may need to add access to your repository if it is not automatically discovered by clicking the `Configure the Netlify app on Github` link at the bottom of the import page.
 
-# Deploy the Site
+![You can choose to either give access to all repositories or search up specific repository names to gives Netlify access.](./Images/3-Repo-Access.PNG)
 
-Now is the time to deploy the React app to GitHub Pages. To do this, run the following command:
+3. In the site settings page, you may choose the deployment branch, declare the output directory, and define environment variables.
 
-```sh
-npm run deploy
-```
+    * For the branch, select `main`.
 
-# Check Project Settings
+    * For the output/Publish directory, select `dist`.
 
-Go to the GitHub project settings by clicking the link shown in the following image:
+    * To modify environment variables, click `Show advanced` (not necessary for this unit).
 
-![In GitHub, the Settings tab is underlined in red.](./Images/01-repo-settings.png)
+    * The remaining properties can be left empty and/or with their default values.
 
-Check that your source branch is `gh-pages`, as shown in the following image:
+![In the Basic Build settings page, we can specify base directory, publish directory, and more. For this demonstration, select dist for publish directory.](./Images/4-Config.PNG)
 
-![In the Settings tab of GitHub Pages, gh-pages is set as the Source.](./Images/02-ready.png)
+4. Click on Deploy.
 
-**Note:** Keep in mind that your page may take a minute or two to deploy. At first, the notification will appear in a blue color while being published.
 
-Finally, let's refresh the page to make sure that the page has been published. This notification will appear in green, as shown in the following image:
+5. Your Vite app is deployed!
 
-![In GitHub Pages, a green notification states, "Your site is published", followed by a link to the site.](./Images/04-published.png)
+    * Once your site is deployed, you can change your site name at any time by clicking on `Site configuration`; when changing your site name, Netlify will preview your site's new URL.
 
-Click on the URL to check that everything looks good.
+![You can click on the Site configuration option to update the site name for the Netlify app.](./Images/5-Site-Configuration.PNG)
 
-## Reflection
+![After selecting the Site configuration option, click on the Change site name button to update the site name as desired.](./Images/6-Change-Name.PNG)
 
-You have successfully deployed your React application to GitHub Pages with just a few simple steps. While doing so, you learned about how the React deploy scripts work and how to prepare your repos for a `gh-page` deployment.
+6. Click on the URL to check that everything looks good.
+
+### Reflection
+
+You have successfully deployed your React application to Netlify with just a few simple steps.
+
+After your project has been imported and deployed, all changes made to the Production Branch (commonly `main`) will result in a Production Deployment.
+
+These instructions can also be found on the [Netlify with Git](https://vitejs.dev/guide/static-deploy.html#netlify-with-git) deployment documentation.
 
 ---
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
