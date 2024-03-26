@@ -8,7 +8,7 @@ function NavTabs({ currentPage, handlePageChange }) {
           href="#home"
           onClick={() => handlePageChange('Home')}
           //*  TODO: BONUS: Add a comment explaining what kind of operator this is and what it is checking for
-
+          // Ternary operator.  It's setting the className value dependent on the whether currentPage's value is Home or not.
           className={currentPage === 'Home' ? 'nav-link active' : 'nav-link'}
         >
           Home
@@ -19,7 +19,7 @@ function NavTabs({ currentPage, handlePageChange }) {
           href="#about"
           onClick={() => handlePageChange('About')}
           //  TODO: Add a comment explaining what this logic is doing
-
+          // It's setting the className value dependent on whether currentPage's value is About or not
           className={currentPage === 'About' ? 'nav-link active' : 'nav-link'}
         >
           About
@@ -30,7 +30,7 @@ function NavTabs({ currentPage, handlePageChange }) {
           href="#blog"
           onClick={() => handlePageChange('Blog')}
           //  TODO: Add a comment explaining what this logic is doing
-
+          // It's setting the className value dependent on whether currentPage's value is Blog or not
           className={currentPage === 'Blog' ? 'nav-link active' : 'nav-link'}
         >
           Blog
@@ -40,7 +40,7 @@ function NavTabs({ currentPage, handlePageChange }) {
         <a
           href="#contact"
           //  TODO: Add a comment explaining what this logic is doing
-
+          // It's setting the className value dependent on whether currentPage's value is Contact or not
           onClick={() => handlePageChange('Contact')}
           className={currentPage === 'Contact' ? 'nav-link active' : 'nav-link'}
         >

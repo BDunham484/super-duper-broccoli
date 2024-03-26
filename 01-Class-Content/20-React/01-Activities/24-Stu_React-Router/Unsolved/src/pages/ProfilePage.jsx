@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState({});
 
   // Todo: Use the useParams hook to find out which user profile has been requested by the user
+  let { id } = useParams();
 
   const fetchData = async () => {
     const { data } = await API.getSingleUser(id);

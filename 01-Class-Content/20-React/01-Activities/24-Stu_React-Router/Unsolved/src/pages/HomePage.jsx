@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 // Todo: Bring in the required component from 'react-router-dom' for linking between pages
-import {  } from 'react-router-dom';
+import { Link, useLocation  } from 'react-router-dom';
 import Profile from '../components/UI/ProfileSections/ProfileTeaser';
 import ListItem from '../components/UI/ListItem';
 
@@ -12,6 +12,8 @@ export default function HomePage() {
 
   const fetchData = async () => {
     const { data } = await API.getUsers();
+
+    console.log('data: ', data);
 
     setUsers(data);
   };
@@ -29,7 +31,7 @@ export default function HomePage() {
             <Profile user={user} />
             {/* Todo: Update this link component's to prop so that the user can click to see a single user's profile */}
             <Link
-              to={}
+              to={`/profile/${user.id}`}
               className="badge bg-primary rounded-pill"
             >
               See More
